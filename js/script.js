@@ -8,33 +8,40 @@ document.addEventListener("mousemove", (e) => {
   circle.style.top = `${y - 450}px`;
 });
 
-const navList = document.querySelectorAll(".nav-list");
-navList.forEach((navListi) => {
-  navListi.addEventListener("click", () => {
-    document.querySelector(".active")?.classList.remove("active");
-    navListi.classList.add("active");
+document.addEventListener('DOMContentLoaded', function() {
+  const sections = document.querySelectorAll('section');
+  const navButtons = document.querySelectorAll('li');
+
+  function setActiveSection() {
+      let currentSectionId = sections[0].id;
+      for (let section of sections) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= sectionTop - 50) {
+              currentSectionId = section.id;
+          }
+      }
+      
+      navButtons.forEach(li => {
+          if (li.dataset.target === currentSectionId) {
+              li.classList.add('active');
+          } else {
+              li.classList.remove('active');
+          }
+      });
+  }
+  window.addEventListener('scroll', setActiveSection);
+
+  navButtons.forEach(li => {
+      li.addEventListener('click', function() {
+          const targetId = this.dataset.target;
+          document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+      });
   });
+
+  // Initial call to set active section on page load
+  setActiveSection();
 });
-
-// let sections = document.querySelectorAll("section");
-// let navlinks = document.querySelectorAll(".nav-list");
-// window.onscroll = () => {
-//   sections.forEach((sec) => {
-//     let top = window.screenY;
-//     let offset = sec.offsetTop;
-//     let height = sec.offsetHeight;
-//     let id = sec.getAttribute("id");
-
-//     if (top >= offset && top < offset + height) {
-//       navlinks.forEach((links) => {
-//         links.classList.remove("active");
-//         document
-//           .querySelector(".nav-list")
-//           .classList.add("active");
-//       });
-//     }
-//   });
-// };
 const scrollTop = function () {
   //create a button in html page
   const scrollBtn = document.createElement("button");
@@ -52,9 +59,9 @@ const scrollTop = function () {
   const scrollWindow = function () {
     if (window.scrollY != 0) {
       setTimeout(function () {
-        window.scrollTo(0, window.scrollY - 50);
+        window.scrollTo(0, window.scrollY - 40);
         scrollWindow();
-      }, 10);
+      }, 100);
     }
   };
   scrollBtn.addEventListener("click", scrollWindow);
