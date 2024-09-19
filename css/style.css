@@ -106,7 +106,7 @@ ul {
 }
 .sidebar {
   height: 100vh;
-  padding: 6rem 0;
+  padding: 5rem 0;
   width: 47%;
   left: 0;
 }
@@ -350,6 +350,7 @@ ul {
     display: none;
   }
   #about {
+    padding: 30px;
     padding-top: 0;
   }
   .sidebar {
@@ -374,6 +375,11 @@ ul {
   }
   #experirnce {
     padding-top: 0;
+  }
+  #about {
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 40px;
   }
   .sidebar p {
     padding-right: 0;
@@ -453,3 +459,6 @@ table ul li {
   -ms-transform: translateX(-4px);
   -o-transform: translateX(-4px);
 }
+/* table tbody tr td:nth-child(3) {
+  width: 100px;
+} */
